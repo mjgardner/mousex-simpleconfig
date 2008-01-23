@@ -3,12 +3,22 @@
 use strict;
 use warnings;
 
-use Test::More tests => 6;
-
 use lib 't/lib';
 use lib '../t/lib';
 
 BEGIN {
+    use Test::More;
+
+    eval "use YAML::Syck ()";
+    if($@) {
+        eval "use YAML ()";
+        if($@) {
+            plan skip_all => "YAML or YAML::Syck required for this test";
+        }
+    }
+    
+    plan tests => 6;
+
     use_ok('MXSimpleConfigTest');
 }
 
