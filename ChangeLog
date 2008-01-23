@@ -1,5 +1,9 @@
 Revision history for Perl extension MooseX::SimpleConfig
 
+0.03 - Jan 23, 2008
+    - Mostly just added pod and tests for configfile
+      defaulting
+
 0.02 - Dec 19, 2007
     - Skip the tests if neither of YAML or YAML::Syck is
       installed (but don't make it a test requirement,

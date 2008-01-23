@@ -3,7 +3,7 @@ package MooseX::SimpleConfig;
 use Moose::Role;
 with 'MooseX::ConfigFromFile';
 
-our $VERSION   = '0.02';
+our $VERSION   = '0.03';
 
 use Config::Any ();
 
@@ -106,7 +106,10 @@ well, which allows specifying C<-configfile> on the commandline.
 
 =head2 configfile
 
-Provided by the base role L<MooseX::ConfigFromFile>.
+Provided by the base role L<MooseX::ConfigFromFile>.  You can
+provide a default configfile pathname like so:
+
+  has +configfile ( default => '/etc/myapp.yaml' );
 
 =head1 CLASS METHODS
 

@@ -18,4 +18,6 @@ META.yml
 README
 t/01use.t
 t/10simple.t
+t/11default.t
+t/lib/MXDefaultConfigTest.pm
 t/lib/MXSimpleConfigTest.pm

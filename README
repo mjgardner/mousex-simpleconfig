@@ -65,7 +65,10 @@ DESCRIPTION
 
 ATTRIBUTES
   configfile
-    Provided by the base role MooseX::ConfigFromFile.
+    Provided by the base role MooseX::ConfigFromFile. You can provide a
+    default configfile pathname like so:
+
+      has +configfile ( default => '/etc/myapp.yaml' );
 
 CLASS METHODS
   new_with_config
