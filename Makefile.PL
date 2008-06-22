@@ -1,5 +1,5 @@
 # Load the Module::Install bundled in ./inc/
-use inc::Module::Install 0.65;
+use inc::Module::Install 0.75;
 
 name 'MooseX-SimpleConfig';
 all_from 'lib/MooseX/SimpleConfig.pm';
