@@ -10,10 +10,12 @@ use Config::Any ();
 sub get_config_from_file {
     my ($class, $file) = @_;
 
-    my $raw_cfany = Config::Any->load_files({
-        files => [ $file ],
-        use_ext => 1,
-    });
+    my $can_config_any_args = $class->can('config_any_args');
+    my %args = $can_config_any_args ?
+        ( %{$can_config_any_args->($class, $file)}, files => [ $file ], use_ext => 1 ) :
+        ( files => [ $file ], use_ext => 1 )
+    ;
+    my $raw_cfany = Config::Any->load_files(\%args);
 
     die q{Specified configfile '} . $file
         . q{' does not exist, is empty, or is not readable}
