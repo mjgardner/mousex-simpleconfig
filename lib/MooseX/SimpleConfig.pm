@@ -11,11 +11,14 @@ sub get_config_from_file {
     my ($class, $file) = @_;
 
     my $can_config_any_args = $class->can('config_any_args');
-    my %args = $can_config_any_args ?
-        ( %{$can_config_any_args->($class, $file)}, files => [ $file ], use_ext => 1 ) :
-        ( files => [ $file ], use_ext => 1 )
+    my $extra_args = $can_config_any_args ? 
+        $can_config_any_args->($class, $file) : {};
     ;
-    my $raw_cfany = Config::Any->load_files(\%args);
+    my $raw_cfany = Config::Any->load_files({
+        use_ext => 1,
+        %$extra_args,
+        files => [ $file ]
+    } );
 
     die q{Specified configfile '} . $file
         . q{' does not exist, is empty, or is not readable}
