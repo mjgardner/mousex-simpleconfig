@@ -7,46 +7,46 @@ SYNOPSIS
       foo: bar
       baz: 123
 
-      ## In your class 
+      ## In your class
       package My::App;
       use Moose;
-      
-  with 'MooseX::SimpleConfig';
-      
-  has 'foo' => (is => 'ro', isa => 'Str', required => 1);
+
+      with 'MooseX::SimpleConfig';
+
+      has 'foo' => (is => 'ro', isa => 'Str', required => 1);
       has 'baz'  => (is => 'rw', isa => 'Int', required => 1);
-      
-  # ... rest of the class here
-      
-  ## in your script
+
+      # ... rest of the class here
+
+      ## in your script
       #!/usr/bin/perl
-      
-  use My::App;
-      
-  my $app = My::App->new_with_config(configfile => '/etc/my_app.yaml');
+
+      use My::App;
+
+      my $app = My::App->new_with_config(configfile => '/etc/my_app.yaml');
       # ... rest of the script here
 
       ####################
       ###### combined with MooseX::Getopt:
 
-      ## In your class 
+      ## In your class
       package My::App;
       use Moose;
-      
-  with 'MooseX::SimpleConfig';
+
+      with 'MooseX::SimpleConfig';
       with 'MooseX::Getopt';
-      
-  has 'foo' => (is => 'ro', isa => 'Str', required => 1);
+
+      has 'foo' => (is => 'ro', isa => 'Str', required => 1);
       has 'baz'  => (is => 'rw', isa => 'Int', required => 1);
-      
-  # ... rest of the class here
-      
-  ## in your script
+
+      # ... rest of the class here
+
+      ## in your script
       #!/usr/bin/perl
-      
-  use My::App;
-      
-  my $app = My::App->new_with_options();
+
+      use My::App;
+
+      my $app = My::App->new_with_options();
       # ... rest of the script here
 
       ## on the command line
