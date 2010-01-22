@@ -123,6 +123,13 @@ provide a default configfile pathname like so:
 
   has +configfile ( default => '/etc/myapp.yaml' );
 
+You can pass an array of filenames if you want, but as usual the array
+has to be wrapped in a sub ref.
+
+  has +configfile ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
+
+Config files are trivially merged at the top level, with the right-hand files taking precedence.
+
 =head1 CLASS METHODS
 
 =head2 new_with_config
