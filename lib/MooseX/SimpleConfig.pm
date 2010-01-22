@@ -10,27 +10,34 @@ use Config::Any ();
 sub get_config_from_file {
     my ($class, $file) = @_;
 
+    my $files_ref = ref $file eq 'ARRAY' ? $file : [$file];
+
     my $can_config_any_args = $class->can('config_any_args');
     my $extra_args = $can_config_any_args ?
         $can_config_any_args->($class, $file) : {};
     ;
     my $raw_cfany = Config::Any->load_files({
-        use_ext => 1,
         %$extra_args,
-        files => [ $file ]
+        use_ext         => 1,
+        files           => $files_ref,
+        flatten_to_hash => 1,
     } );
 
-    die q{Specified configfile '} . $file
-        . q{' does not exist, is empty, or is not readable}
-            unless $raw_cfany->[0]
-                && exists $raw_cfany->[0]->{$file};
+    my %raw_config;
+    foreach my $file_tested ( @{$files_ref} ) {
+        if ( ! exists $raw_cfany->{$file_tested} ) {
+            die qq{Specified configfile '$file_tested' does not exist, } .
+                q{is empty, or is not readable};
+        }
 
-    my $raw_config = $raw_cfany->[0]->{$file};
+        my $cfany_hash = $raw_cfany->{$file_tested};
+        die "configfile must represent a hash structure in file: $file_tested"
+            unless $cfany_hash && ref $cfany_hash && ref $cfany_hash eq 'HASH';
 
-    die "configfile must represent a hash structure"
-        unless $raw_config && ref $raw_config && ref $raw_config eq 'HASH';
+        %raw_config = ( %raw_config, %{$cfany_hash} );
+    }
 
-    $raw_config;
+    \%raw_config;
 }
 
 no Moose::Role; 1;
