@@ -70,6 +70,14 @@ ATTRIBUTES
 
       has +configfile ( default => '/etc/myapp.yaml' );
 
+    You can pass an array of filenames if you want, but as usual the array
+    has to be wrapped in a sub ref.
+
+      has +configfile ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
+
+    Config files are trivially merged at the top level, with the right-hand
+    files taking precedence.
+
 CLASS METHODS
   new_with_config
     Provided by the base role MooseX::ConfigFromFile. Acts just like regular
