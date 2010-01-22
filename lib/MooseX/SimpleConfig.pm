@@ -3,7 +3,7 @@ package MooseX::SimpleConfig;
 use Moose::Role;
 with 'MooseX::ConfigFromFile';
 
-our $VERSION   = '0.04';
+our $VERSION   = '0.05';
 
 use Config::Any ();
 

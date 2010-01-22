@@ -1,5 +1,9 @@
 Revision history for Perl extension MooseX::SimpleConfig
 
+0.05 - Jan 22, 2010
+   - Allow multiple config files to be loaded and merged.
+     Patch in RT#48552 from Sawyer X
+
 0.04 - Nov 04, 2009
     - Allow options to be passed through to Config::Any more easily.
 
