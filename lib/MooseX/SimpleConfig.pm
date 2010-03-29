@@ -121,12 +121,12 @@ well, which allows specifying C<-configfile> on the commandline.
 Provided by the base role L<MooseX::ConfigFromFile>.  You can
 provide a default configfile pathname like so:
 
-  has +configfile ( default => '/etc/myapp.yaml' );
+  has '+configfile' => ( default => '/etc/myapp.yaml' );
 
 You can pass an array of filenames if you want, but as usual the array
 has to be wrapped in a sub ref.
 
-  has +configfile ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
+  has '+configfile' => ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
 
 Config files are trivially merged at the top level, with the right-hand files taking precedence.
 
