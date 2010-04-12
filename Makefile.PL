@@ -14,6 +14,11 @@ requires 'Config::Any'                => '0.13';
 system("pod2text lib/MooseX/SimpleConfig.pm >README") and die
     if $Module::Install::AUTHOR;
 
+resources 'IRC'         => 'irc://irc.perl.org/#moose';
+resources 'license'     => 'http://dev.perl.org/licenses/';
+resources 'repository'  => 'git://git.moose.perl.org/MooseX-SimpleConfig.git';
+resources 'MailingList' => 'http://news.gmane.org/gmane.comp.lang.perl.moose';
+
 auto_provides;
 auto_install;
 WriteAll;
