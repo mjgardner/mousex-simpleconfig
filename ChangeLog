@@ -1,5 +1,9 @@
 Revision history for Perl extension MooseX::SimpleConfig
 
+0.06 - Apr 12, 2010
+  - Depend on at least version 0.19 of Config::Any for flatten_to_hash
+    support.
+
 0.05 - Jan 22, 2010
    - Allow multiple config files to be loaded and merged.
      Patch in RT#48552 from Sawyer X
