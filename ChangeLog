@@ -1,5 +1,6 @@
 Revision history for Perl extension MooseX::SimpleConfig
 
+0.07 - May 22, 2010
   - Reverse order of testing config files so that latter options on the
     command line (when multiple are specified) take precedence. (RT#57027)
   - Reduce exception thrown by being unable to find a config file to a
