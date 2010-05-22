@@ -9,7 +9,7 @@ Revision history for Perl extension MooseX::SimpleConfig
   - Added metadata to Makefile.PL
 
 0.06 - Apr 12, 2010
-  - Depend on at least version 0.19 of Config::Any for flatten_to_hash
+  - Depend on at least version 0.13 of Config::Any for flatten_to_hash
     support.
 
 0.05 - Jan 22, 2010
