@@ -24,10 +24,11 @@ sub get_config_from_file {
     } );
 
     my %raw_config;
-    foreach my $file_tested ( @{$files_ref} ) {
+    foreach my $file_tested ( reverse @{$files_ref} ) {
         if ( ! exists $raw_cfany->{$file_tested} ) {
-            die qq{Specified configfile '$file_tested' does not exist, } .
-                q{is empty, or is not readable};
+            warn qq{Specified configfile '$file_tested' does not exist, } .
+                qq{is empty, or is not readable\n};
+                next;
         }
 
         my $cfany_hash = $raw_cfany->{$file_tested};

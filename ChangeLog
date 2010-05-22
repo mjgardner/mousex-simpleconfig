@@ -1,5 +1,9 @@
 Revision history for Perl extension MooseX::SimpleConfig
 
+  - Reverse order of testing config files so that latter options on the
+    command line (when multiple are specified) take precedence. (RT#57027)
+  - Reduce exception thrown by being unable to find a config file to a
+    warning (RT#57027)
   - Fixed configfile attribute examples
   - Added metadata to Makefile.PL
 
