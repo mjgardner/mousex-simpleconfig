@@ -5,9 +5,11 @@ use warnings;
 
 use lib 't/lib';
 use lib '../t/lib';
-
+use Test::More;
+our @classes;
 BEGIN {
-    use Test::More;
+
+    @classes = qw/ MXDefaultConfigTest MXDefaultMultipleConfigsTest /;
 
     eval "use YAML::Syck ()";
     if($@) {
@@ -16,11 +18,8 @@ BEGIN {
             plan skip_all => "YAML or YAML::Syck required for this test";
         }
     }
-    
-    plan tests => 7;
 
-    use_ok('MXDefaultConfigTest');
-    use_ok('MXDefaultWithSubConfigTest');
+    use_ok($_) for @classes;
 }
 
 # Can it load a simple YAML file with the options
@@ -31,8 +30,11 @@ BEGIN {
     print $test_yaml "direct_attr: 123\ninherited_ro_attr: asdf\nreq_attr: foo\n";
     close($test_yaml);
 
+}
+
+foreach my $class (@classes) {
     my $foo = eval {
-        MXDefaultConfigTest->new_with_config();
+        $class->new_with_config();
     };
     ok(!$@, 'Did not die with good YAML configfile')
         or diag $@;
@@ -40,12 +42,8 @@ BEGIN {
     is($foo->req_attr, 'foo', 'req_attr works');
     is($foo->direct_attr, 123, 'direct_attr works');
     is($foo->inherited_ro_attr, 'asdf', 'inherited_ro_attr works');
-
-    $foo = eval {
-        MXDefaultWithSubConfigTest->new_with_config();
-    };
-    ok(!$@, 'Did not die with good YAML configfile')
-        or diag $@;
 }
+
+done_testing;
 
 END { unlink('test.yaml') }

@@ -10,6 +10,8 @@ requires 'Moose'                      => '0.35';
 requires 'MooseX::ConfigFromFile'     => '0.02';
 requires 'Config::Any'                => '0.13';
 
+test_requires 'Test::More' => '0.88';
+
 # Rebuild README for maintainers
 system("pod2text lib/MooseX/SimpleConfig.pm >README") and die
     if $Module::Install::AUTHOR;

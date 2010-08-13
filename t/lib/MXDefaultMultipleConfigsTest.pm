@@ -1,4 +1,4 @@
-package MXDefaultWithSubConfigTest;
+package MXDefaultMultipleConfigsTest;
 use Moose;
 with 'MooseX::SimpleConfig';
 
@@ -9,7 +9,6 @@ has 'direct_attr' => (is => 'ro', isa => 'Int');
 has 'req_attr' => (is => 'rw', isa => 'Str', required => 1);
 
 has '+configfile' => ( default => sub { [ 'test.yaml' ] } );
-#has '+configfile' => ( default => 'test.yaml' );
 
 no Moose;
 1;
