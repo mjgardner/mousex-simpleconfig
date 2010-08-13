@@ -10,6 +10,7 @@ use Config::Any ();
 sub get_config_from_file {
     my ($class, $file) = @_;
 
+    $file = $file->() if ref $file eq 'CODE';
     my $files_ref = ref $file eq 'ARRAY' ? $file : [$file];
 
     my $can_config_any_args = $class->can('config_any_args');
