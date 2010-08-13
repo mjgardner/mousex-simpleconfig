@@ -17,9 +17,10 @@ BEGIN {
         }
     }
     
-    plan tests => 5;
+    plan tests => 7;
 
     use_ok('MXDefaultConfigTest');
+    use_ok('MXDefaultWithSubConfigTest');
 }
 
 # Can it load a simple YAML file with the options
@@ -39,6 +40,12 @@ BEGIN {
     is($foo->req_attr, 'foo', 'req_attr works');
     is($foo->direct_attr, 123, 'direct_attr works');
     is($foo->inherited_ro_attr, 'asdf', 'inherited_ro_attr works');
+
+    $foo = eval {
+        MXDefaultWithSubConfigTest->new_with_config();
+    };
+    ok(!$@, 'Did not die with good YAML configfile')
+        or diag $@;
 }
 
 END { unlink('test.yaml') }
