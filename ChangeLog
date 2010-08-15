@@ -1,5 +1,8 @@
 Revision history for Perl extension MooseX::SimpleConfig
 
+0.09 - Aug 15, 2010
+  - Fix issue with MANIFEST
+
 0.08 - Aug 13, 2010
   - Fix passing multiple config files to SimpleConfig.
     - Tests for this (zby)
