@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.10      2011-03-05 13:23:37 America/New_York
   - convert release to Dist::Zilla
 0.09 - Mar 05, 2011
   - port to Mouse from MooseX::SimpleConfig (mjgardner)
