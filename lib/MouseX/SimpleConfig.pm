@@ -2,23 +2,29 @@ package MouseX::SimpleConfig;
 
 # ABSTRACT: A Mouse role for setting attributes from a simple configfile
 
+use Carp;
+use English '-no_match_vars';
 use Mouse::Role;
 with 'MouseX::ConfigFromFile';
 
 use Config::Any ();
 
 sub get_config_from_file {
-    my ($class, $file) = @_;
+    my ($class, $file) = @ARG;
 
-    $file = $file->() if ref $file eq 'CODE';
-    my $files_ref = ref $file eq 'ARRAY' ? $file : [$file];
+    my $files_ref;
+    given (ref $file) {
+        when ('CODE')  { $file = $file->() }
+        when ('ARRAY') { $files_ref = $file }
+        default        { $files_ref = [$file] }
+    }
 
     my $can_config_any_args = $class->can('config_any_args');
     my $extra_args = $can_config_any_args ?
         $can_config_any_args->($class, $file) : {};
     ;
     my $raw_cfany = Config::Any->load_files({
-        %$extra_args,
+        %{$extra_args},
         use_ext         => 1,
         files           => $files_ref,
         flatten_to_hash => 1,
@@ -33,13 +39,13 @@ sub get_config_from_file {
         }
 
         my $cfany_hash = $raw_cfany->{$file_tested};
-        die "configfile must represent a hash structure in file: $file_tested"
+        croak "configfile must represent a hash structure in file: $file_tested"
             unless $cfany_hash && ref $cfany_hash && ref $cfany_hash eq 'HASH';
 
         %raw_config = ( %raw_config, %{$cfany_hash} );
     }
 
-    \%raw_config;
+    return \%raw_config;
 }
 
 no Mouse::Role; 1;

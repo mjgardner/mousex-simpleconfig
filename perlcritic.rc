@@ -17,7 +17,7 @@ lib_sections    = NAME | VERSION | DESCRIPTION | SYNOPSIS | COPYRIGHT AND LICENS
 script_sections = NAME | USAGE | OPTIONS | EXIT STATUS | COPYRIGHT AND LICENSE
 
 [Subroutines::ProhibitCallsToUndeclaredSubs]
-exempt_subs = Mouse::blessed Mouse::extends Mouse::has Mouse::with Mouse::Role::with
+exempt_subs = Carp::croak Mouse::blessed Mouse::extends Mouse::has Mouse::with Mouse::Role::with
 
 [TestingAndDebugging::RequireUseStrict]
 equivalent_modules = Modern::Perl
