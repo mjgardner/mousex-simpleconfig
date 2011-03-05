@@ -1,4 +1,7 @@
-Revision history for Perl extension MooseX::SimpleConfig
+Revision history for Perl extension MouseX::SimpleConfig
+
+0.09 - Mar 05, 2011
+  - port to Mouse from MooseX::SimpleConfig (mjgardner)
 
 0.09 - Aug 15, 2010
   - Fix issue with MANIFEST
