@@ -10,14 +10,14 @@ allowed_pragmata = diagnostics feature perlversion strict warnings utf8
 above_version = 5.010
 
 [Documentation::PodSpelling]
-stop_words = bugtracker
+stop_words = bugtracker configfile configfiles config commandline pathname filenames Config
 
 [Documentation::RequirePodSections]
 lib_sections    = NAME | VERSION | DESCRIPTION | SYNOPSIS | COPYRIGHT AND LICENSE
 script_sections = NAME | USAGE | OPTIONS | EXIT STATUS | COPYRIGHT AND LICENSE
 
 [Subroutines::ProhibitCallsToUndeclaredSubs]
-exempt_subs = Mouse::blessed Mouse::extends Mouse::has Mouse::with
+exempt_subs = Mouse::blessed Mouse::extends Mouse::has Mouse::with Mouse::Role::with
 
 [TestingAndDebugging::RequireUseStrict]
 equivalent_modules = Modern::Perl
