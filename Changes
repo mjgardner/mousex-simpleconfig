@@ -1,4 +1,4 @@
-Revision history for Perl extension MouseX::SimpleConfig
+{{$NEXT}}
 
 0.09 - Mar 05, 2011
   - port to Mouse from MooseX::SimpleConfig (mjgardner)

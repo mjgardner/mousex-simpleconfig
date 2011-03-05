@@ -1,48 +1,16 @@
-package MouseX::SimpleConfig;
+=pod
 
-# ABSTRACT: A Mouse role for setting attributes from a simple configfile
+=for :stopwords Brandon L. Black Mark Gardner Infinity Interactive
 
-use Mouse::Role;
-with 'MouseX::ConfigFromFile';
+=encoding utf8
 
-use Config::Any ();
+=head1 NAME
 
-sub get_config_from_file {
-    my ($class, $file) = @_;
+MouseX::SimpleConfig - A Mouse role for setting attributes from a simple configfile
 
-    $file = $file->() if ref $file eq 'CODE';
-    my $files_ref = ref $file eq 'ARRAY' ? $file : [$file];
+=head1 VERSION
 
-    my $can_config_any_args = $class->can('config_any_args');
-    my $extra_args = $can_config_any_args ?
-        $can_config_any_args->($class, $file) : {};
-    ;
-    my $raw_cfany = Config::Any->load_files({
-        %$extra_args,
-        use_ext         => 1,
-        files           => $files_ref,
-        flatten_to_hash => 1,
-    } );
-
-    my %raw_config;
-    foreach my $file_tested ( reverse @{$files_ref} ) {
-        if ( ! exists $raw_cfany->{$file_tested} ) {
-            warn qq{Specified configfile '$file_tested' does not exist, } .
-                qq{is empty, or is not readable\n};
-                next;
-        }
-
-        my $cfany_hash = $raw_cfany->{$file_tested};
-        die "configfile must represent a hash structure in file: $file_tested"
-            unless $cfany_hash && ref $cfany_hash && ref $cfany_hash eq 'HASH';
-
-        %raw_config = ( %raw_config, %{$cfany_hash} );
-    }
-
-    \%raw_config;
-}
-
-no Mouse::Role; 1;
+version 0.10
 
 =head1 SYNOPSIS
 
@@ -108,6 +76,8 @@ Like all L<MouseX::ConfigFromFile> -derived configfile loaders, this
 module is automatically supported by the L<MouseX::Getopt> role as
 well, which allows specifying C<-configfile> on the commandline.
 
+=encoding utf8
+
 =head1 ATTRIBUTES
 
 =head2 configfile
@@ -137,3 +107,34 @@ to C<new_with_config> will override anything loaded from the configfile.
 
 Called internally by either C<new_with_config> or L<MouseX::Getopt>'s
 C<new_with_options>.  Invokes L<Config::Any> to parse C<configfile>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website
+http://github.com/mjg/MouseX-SimpleConfig/issues
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
+
+=head1 AUTHORS
+
+=over 4
+
+=item *
+
+Brandon L. Black <blblack@gmail.com>
+
+=item *
+
+Mark Gardner <mjgardner@cpan.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
