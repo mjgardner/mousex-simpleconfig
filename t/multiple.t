@@ -10,13 +10,13 @@ BEGIN {
     use Test::More;
 
     eval "use YAML::Syck ()";
-    if($@) {
+    if ($@) {
         eval "use YAML ()";
-        if($@) {
+        if ($@) {
             plan skip_all => "YAML or YAML::Syck required for this test";
         }
     }
-    
+
     plan tests => 5;
 
     use_ok('MXSimpleConfigTest');
@@ -24,7 +24,7 @@ BEGIN {
 
 # Can it load a multiple YAML files with options
 {
-    my $test_yaml; # generic filehandle
+    my $test_yaml;    # generic filehandle
     open $test_yaml, '>', 'test.yaml' or die "Cannot create test.yaml: $!";
     print {$test_yaml} "direct_attr: 123\ninherited_ro_attr: asdf\n";
     close $test_yaml or die "Cannot close test.yaml: $!";
@@ -35,15 +35,14 @@ BEGIN {
 
     my $foo = eval {
         MXSimpleConfigTest->new_with_config(
-            configfile => [ 'test.yaml', 'test2.yaml' ]
-        );
+            configfile => [ 'test.yaml', 'test2.yaml' ] );
     };
-    ok(!$@, 'Did not die with two YAML config files')
+    ok( !$@, 'Did not die with two YAML config files' )
         or diag $@;
 
-    is($foo->req_attr, 'foo', 'req_attr works');
-    is($foo->direct_attr, 123, 'direct_attr works');
-    is($foo->inherited_ro_attr, 'asdf', 'inherited_ro_attr works');
+    is( $foo->req_attr,          'foo',  'req_attr works' );
+    is( $foo->direct_attr,       123,    'direct_attr works' );
+    is( $foo->inherited_ro_attr, 'asdf', 'inherited_ro_attr works' );
 }
 
 END {

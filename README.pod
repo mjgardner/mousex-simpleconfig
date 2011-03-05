@@ -66,14 +66,18 @@ version 0.10
 =head1 DESCRIPTION
 
 This role loads simple configfiles to set object attributes.  It
-is based on the abstract role L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>, and uses
-L<Config::Any|Config::Any> to load your configfile.  L<Config::Any|Config::Any> will in
+is based on the abstract role
+L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>, and uses
+L<Config::Any|Config::Any> to load your configfile.
+L<Config::Any|Config::Any> will in
 turn support any of a variety of different config formats, detected
 by the file extension.  See L<Config::Any|Config::Any> for more details about
 supported formats.
 
-Like all L<MouseX::ConfigFromFile|MouseX::ConfigFromFile> -derived configfile loaders, this
-module is automatically supported by the L<MouseX::Getopt|MouseX::Getopt> role as
+Like all L<MouseX::ConfigFromFile|MouseX::ConfigFromFile> -derived configfile
+loaders, this
+module is automatically supported by the L<MouseX::Getopt|MouseX::Getopt> role
+as
 well, which allows specifying C<-configfile> on the commandline.
 
 =encoding utf8
@@ -82,7 +86,8 @@ well, which allows specifying C<-configfile> on the commandline.
 
 =head2 configfile
 
-Provided by the base role L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>.  You can
+Provided by the base role L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>.
+You can
 provide a default configfile pathname like so:
 
   has '+configfile' => ( default => '/etc/myapp.yaml' );
@@ -92,21 +97,25 @@ has to be wrapped in a sub ref.
 
   has '+configfile' => ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
 
-Config files are trivially merged at the top level, with the right-hand files taking precedence.
+Config files are trivially merged at the top level, with the right-hand files
+taking precedence.
 
 =head1 CLASS METHODS
 
 =head2 new_with_config
 
-Provided by the base role L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>.  Acts just like
+Provided by the base role L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>.
+Acts just like
 regular C<new()>, but also accepts an argument C<configfile> to specify
 the configfile from which to load other attributes.  Explicit arguments
 to C<new_with_config> will override anything loaded from the configfile.
 
 =head2 get_config_from_file
 
-Called internally by either C<new_with_config> or L<MouseX::Getopt|MouseX::Getopt>'s
-C<new_with_options>.  Invokes L<Config::Any|Config::Any> to parse C<configfile>.
+Called internally by either C<new_with_config> or
+L<MouseX::Getopt|MouseX::Getopt>'s
+C<new_with_options>.  Invokes L<Config::Any|Config::Any> to parse
+C<configfile>.
 
 =head1 BUGS
 
