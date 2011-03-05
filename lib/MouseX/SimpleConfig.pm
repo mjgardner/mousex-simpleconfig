@@ -46,22 +46,21 @@ sub get_config_from_file {
     my ( $class, $file ) = @ARG;
 
     my $files_ref;
-    given ( ref $file ) {
-        when ('CODE')  { $file      = $file->() }
-        when ('ARRAY') { $files_ref = $file }
-        default        { $files_ref = [$file] }
+    for ( ref $file ) {
+        $ARG eq 'CODE'  and do { $file      = $file->(); last };
+        $ARG eq 'ARRAY' and do { $files_ref = $file;     last };
+        $files_ref = [$file];
     }
 
     my $can_config_any_args = $class->can('config_any_args');
-    my $extra_args
-        = $can_config_any_args ? $can_config_any_args->( $class, $file ) : {};
-    my $raw_cfany = Config::Any->load_files(
-        {   %{$extra_args},
-            use_ext         => 1,
-            files           => $files_ref,
-            flatten_to_hash => 1,
-        }
-    );
+    my %cfany_args;
+    if ($can_config_any_args) {
+        %cfany_args = %{ $can_config_any_args->( $class, $file ) };
+    }
+    $cfany_args{use_ext}         = 1;
+    $cfany_args{files}           = $files_ref;
+    $cfany_args{flatten_to_hash} = 1;
+    my $raw_cfany = Config::Any->load_files( \%cfany_args );
 
     my %raw_config;
     foreach my $file_tested ( reverse @{$files_ref} ) {
@@ -74,8 +73,7 @@ sub get_config_from_file {
         my $cfany_hash = $raw_cfany->{$file_tested};
         croak
             "configfile must represent a hash structure in file: $file_tested"
-            if
-            not(       $cfany_hash
+            if not(    $cfany_hash
                     && ref $cfany_hash
                     && ref $cfany_hash eq 'HASH' );
 

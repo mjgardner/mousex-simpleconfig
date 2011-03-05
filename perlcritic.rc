@@ -1,13 +1,9 @@
 severity = brutal
 verbose = 8
-exclude = Compatibility::PodMinimumVersion Editor::RequireEmacsFileVariables Miscellanea::RequireRcsKeywords Modules::RequireExplicitInclusion Modules::RequireExplicitPackage Modules::RequirePerlVersion
+exclude = CodeLayout::RequireUseUTF8 Documentation::RequirePODUseEncodingUTF8 Editor::RequireEmacsFileVariables Miscellanea::RequireRcsKeywords Modules::RequireExplicitPackage 
 
 [Lax::RequireExplicitPackage::ExceptForPragmata]
 allowed_pragmata = diagnostics feature perlversion strict warnings utf8
-
-# since we're using Modern::Perl
-[Compatibility::PerlMinimumVersionAndWhy]
-above_version = 5.010
 
 [Documentation::PodSpelling]
 stop_words = bugtracker configfile configfiles config commandline pathname filenames Config
@@ -20,7 +16,7 @@ script_sections = NAME | USAGE | OPTIONS | EXIT STATUS | COPYRIGHT AND LICENSE
 exempt_subs = Carp::croak Mouse::blessed Mouse::extends Mouse::has Mouse::with Mouse::Role::with
 
 [TestingAndDebugging::RequireUseStrict]
-equivalent_modules = Modern::Perl
+equivalent_modules = Mouse Mouse::Role
 
 [TestingAndDebugging::RequireUseWarnings]
-equivalent_modules = Modern::Perl
+equivalent_modules = Mouse Mouse::Role

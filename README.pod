@@ -2,15 +2,13 @@
 
 =for :stopwords Brandon L. Black Mark Gardner Infinity Interactive
 
-=encoding utf8
-
 =head1 NAME
 
 MouseX::SimpleConfig - A Mouse role for setting attributes from a simple configfile
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -114,8 +112,6 @@ Class method called internally by either C<new_with_config> or
 L<MouseX::Getopt|MouseX::Getopt>'s
 C<new_with_options>.  Invokes L<Config::Any|Config::Any> to parse
 C<configfile>.
-
-=encoding utf8
 
 =head1 BUGS
 
