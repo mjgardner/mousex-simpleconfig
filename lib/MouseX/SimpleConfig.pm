@@ -9,6 +9,39 @@ with 'MouseX::ConfigFromFile';
 
 use Config::Any ();
 
+=attr configfile
+
+Provided by the base role L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>.
+You can
+provide a default configfile pathname like so:
+
+  has '+configfile' => ( default => '/etc/myapp.yaml' );
+
+You can pass an array of filenames if you want, but as usual the array
+has to be wrapped in a sub ref.
+
+  has '+configfile' => ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
+
+Config files are trivially merged at the top level, with the right-hand files
+taking precedence.
+
+=method new_with_config
+
+Class method provided by the base role
+L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>. Acts just like
+regular C<new()>, but also accepts an argument C<configfile> to specify
+the configfile from which to load other attributes.  Explicit arguments
+to C<new_with_config> will override anything loaded from the configfile.
+
+=method get_config_from_file
+
+Class method called internally by either C<new_with_config> or
+L<MouseX::Getopt|MouseX::Getopt>'s
+C<new_with_options>.  Invokes L<Config::Any|Config::Any> to parse
+C<configfile>.
+
+=cut
+
 sub get_config_from_file {
     my ( $class, $file ) = @ARG;
 
@@ -122,38 +155,3 @@ loaders, this
 module is automatically supported by the L<MouseX::Getopt|MouseX::Getopt> role
 as
 well, which allows specifying C<-configfile> on the commandline.
-
-=head1 ATTRIBUTES
-
-=head2 configfile
-
-Provided by the base role L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>.
-You can
-provide a default configfile pathname like so:
-
-  has '+configfile' => ( default => '/etc/myapp.yaml' );
-
-You can pass an array of filenames if you want, but as usual the array
-has to be wrapped in a sub ref.
-
-  has '+configfile' => ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
-
-Config files are trivially merged at the top level, with the right-hand files
-taking precedence.
-
-=head1 CLASS METHODS
-
-=head2 new_with_config
-
-Provided by the base role L<MouseX::ConfigFromFile|MouseX::ConfigFromFile>.
-Acts just like
-regular C<new()>, but also accepts an argument C<configfile> to specify
-the configfile from which to load other attributes.  Explicit arguments
-to C<new_with_config> will override anything loaded from the configfile.
-
-=head2 get_config_from_file
-
-Called internally by either C<new_with_config> or
-L<MouseX::Getopt|MouseX::Getopt>'s
-C<new_with_options>.  Invokes L<Config::Any|Config::Any> to parse
-C<configfile>.
