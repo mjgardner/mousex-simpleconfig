@@ -1,5 +1,5 @@
 NAME
-    MooseX::SimpleConfig - A Moose role for setting attributes from a simple
+    MouseX::SimpleConfig - A Mouse role for setting attributes from a simple
     configfile
 
 SYNOPSIS
@@ -9,9 +9,9 @@ SYNOPSIS
 
       ## In your class
       package My::App;
-      use Moose;
+      use Mouse;
 
-      with 'MooseX::SimpleConfig';
+      with 'MouseX::SimpleConfig';
 
       has 'foo' => (is => 'ro', isa => 'Str', required => 1);
       has 'baz'  => (is => 'rw', isa => 'Int', required => 1);
@@ -27,14 +27,14 @@ SYNOPSIS
       # ... rest of the script here
 
       ####################
-      ###### combined with MooseX::Getopt:
+      ###### combined with MouseX::Getopt:
 
       ## In your class
       package My::App;
-      use Moose;
+      use Mouse;
 
-      with 'MooseX::SimpleConfig';
-      with 'MooseX::Getopt';
+      with 'MouseX::SimpleConfig';
+      with 'MouseX::Getopt';
 
       has 'foo' => (is => 'ro', isa => 'Str', required => 1);
       has 'baz'  => (is => 'rw', isa => 'Int', required => 1);
@@ -54,18 +54,18 @@ SYNOPSIS
 
 DESCRIPTION
     This role loads simple configfiles to set object attributes. It is based
-    on the abstract role MooseX::ConfigFromFile, and uses Config::Any to
+    on the abstract role MouseX::ConfigFromFile, and uses Config::Any to
     load your configfile. Config::Any will in turn support any of a variety
     of different config formats, detected by the file extension. See
     Config::Any for more details about supported formats.
 
-    Like all MooseX::ConfigFromFile -derived configfile loaders, this module
-    is automatically supported by the MooseX::Getopt role as well, which
+    Like all MouseX::ConfigFromFile -derived configfile loaders, this module
+    is automatically supported by the MouseX::Getopt role as well, which
     allows specifying "-configfile" on the commandline.
 
 ATTRIBUTES
   configfile
-    Provided by the base role MooseX::ConfigFromFile. You can provide a
+    Provided by the base role MouseX::ConfigFromFile. You can provide a
     default configfile pathname like so:
 
       has '+configfile' => ( default => '/etc/myapp.yaml' );
@@ -80,17 +80,18 @@ ATTRIBUTES
 
 CLASS METHODS
   new_with_config
-    Provided by the base role MooseX::ConfigFromFile. Acts just like regular
+    Provided by the base role MouseX::ConfigFromFile. Acts just like regular
     "new()", but also accepts an argument "configfile" to specify the
     configfile from which to load other attributes. Explicit arguments to
     "new_with_config" will override anything loaded from the configfile.
 
   get_config_from_file
-    Called internally by either "new_with_config" or MooseX::Getopt's
+    Called internally by either "new_with_config" or MouseX::Getopt's
     "new_with_options". Invokes Config::Any to parse "configfile".
 
 AUTHOR
     Brandon L. Black, <blblack@gmail.com>
+    Mark Gardner <mjgardner@cpan.org>
 
 LICENSE
     This library is free software; you can redistribute it and/or modify it

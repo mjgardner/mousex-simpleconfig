@@ -1,9 +1,9 @@
 package MXDefaultMultipleConfigsTest;
-use Moose;
+use Mouse;
 
 extends 'MXDefaultConfigTest';
 
 has '+configfile' => ( default => sub { [ 'test.yaml' ] } );
 
-no Moose;
+no Mouse;
 1;

@@ -1,19 +1,19 @@
 package MXSimpleConfigTestBase;
-use Moose;
+use Mouse;
 
 has 'inherited_ro_attr' => (is => 'ro', isa => 'Str');
 
-no Moose;
+no Mouse;
 1;
 
 package MXSimpleConfigTest;
-use Moose;
+use Mouse;
 extends 'MXSimpleConfigTestBase';
-with 'MooseX::SimpleConfig';
+with 'MouseX::SimpleConfig';
 
 has 'direct_attr' => (is => 'ro', isa => 'Int');
 
 has 'req_attr' => (is => 'rw', isa => 'Str', required => 1);
 
-no Moose;
+no Mouse;
 1;

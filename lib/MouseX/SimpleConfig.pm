@@ -1,7 +1,7 @@
-package MooseX::SimpleConfig;
+package MouseX::SimpleConfig;
 
-use Moose::Role;
-with 'MooseX::ConfigFromFile';
+use Mouse::Role;
+with 'MouseX::ConfigFromFile';
 
 our $VERSION   = '0.09';
 
@@ -42,7 +42,7 @@ sub get_config_from_file {
     \%raw_config;
 }
 
-no Moose::Role; 1;
+no Mouse::Role; 1;
 
 __END__
 
@@ -50,7 +50,7 @@ __END__
 
 =head1 NAME
 
-MooseX::SimpleConfig - A Moose role for setting attributes from a simple configfile
+MouseX::SimpleConfig - A Mouse role for setting attributes from a simple configfile
 
 =head1 SYNOPSIS
 
@@ -60,9 +60,9 @@ MooseX::SimpleConfig - A Moose role for setting attributes from a simple configf
 
   ## In your class
   package My::App;
-  use Moose;
+  use Mouse;
 
-  with 'MooseX::SimpleConfig';
+  with 'MouseX::SimpleConfig';
 
   has 'foo' => (is => 'ro', isa => 'Str', required => 1);
   has 'baz'  => (is => 'rw', isa => 'Int', required => 1);
@@ -78,14 +78,14 @@ MooseX::SimpleConfig - A Moose role for setting attributes from a simple configf
   # ... rest of the script here
 
   ####################
-  ###### combined with MooseX::Getopt:
+  ###### combined with MouseX::Getopt:
 
   ## In your class
   package My::App;
-  use Moose;
+  use Mouse;
 
-  with 'MooseX::SimpleConfig';
-  with 'MooseX::Getopt';
+  with 'MouseX::SimpleConfig';
+  with 'MouseX::Getopt';
 
   has 'foo' => (is => 'ro', isa => 'Str', required => 1);
   has 'baz'  => (is => 'rw', isa => 'Int', required => 1);
@@ -106,21 +106,21 @@ MooseX::SimpleConfig - A Moose role for setting attributes from a simple configf
 =head1 DESCRIPTION
 
 This role loads simple configfiles to set object attributes.  It
-is based on the abstract role L<MooseX::ConfigFromFile>, and uses
+is based on the abstract role L<MouseX::ConfigFromFile>, and uses
 L<Config::Any> to load your configfile.  L<Config::Any> will in
 turn support any of a variety of different config formats, detected
 by the file extension.  See L<Config::Any> for more details about
 supported formats.
 
-Like all L<MooseX::ConfigFromFile> -derived configfile loaders, this
-module is automatically supported by the L<MooseX::Getopt> role as
+Like all L<MouseX::ConfigFromFile> -derived configfile loaders, this
+module is automatically supported by the L<MouseX::Getopt> role as
 well, which allows specifying C<-configfile> on the commandline.
 
 =head1 ATTRIBUTES
 
 =head2 configfile
 
-Provided by the base role L<MooseX::ConfigFromFile>.  You can
+Provided by the base role L<MouseX::ConfigFromFile>.  You can
 provide a default configfile pathname like so:
 
   has '+configfile' => ( default => '/etc/myapp.yaml' );
@@ -136,19 +136,25 @@ Config files are trivially merged at the top level, with the right-hand files ta
 
 =head2 new_with_config
 
-Provided by the base role L<MooseX::ConfigFromFile>.  Acts just like
+Provided by the base role L<MouseX::ConfigFromFile>.  Acts just like
 regular C<new()>, but also accepts an argument C<configfile> to specify
 the configfile from which to load other attributes.  Explicit arguments
 to C<new_with_config> will override anything loaded from the configfile.
 
 =head2 get_config_from_file
 
-Called internally by either C<new_with_config> or L<MooseX::Getopt>'s
+Called internally by either C<new_with_config> or L<MouseX::Getopt>'s
 C<new_with_options>.  Invokes L<Config::Any> to parse C<configfile>.
 
 =head1 AUTHOR
 
-Brandon L. Black, E<lt>blblack@gmail.comE<gt>
+=over
+
+=item Brandon L. Black, E<lt>blblack@gmail.comE<gt>
+
+=item Mark Gardner E<lt>mjgardner@cpan.orgE<gt>
+
+=back
 
 =head1 LICENSE
 

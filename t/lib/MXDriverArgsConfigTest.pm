@@ -1,15 +1,15 @@
 package MXDriverArgsConfigTestBase;
-use Moose;
+use Mouse;
 
 has 'inherited_ro_attr' => (is => 'ro', isa => 'Str');
 
-no Moose;
+no Mouse;
 1;
 
 package MXDriverArgsConfigTest;
-use Moose;
+use Mouse;
 extends 'MXDriverArgsConfigTestBase';
-with 'MooseX::SimpleConfig';
+with 'MouseX::SimpleConfig';
 
 has 'direct_attr' => (is => 'ro', isa => 'Int');
 
@@ -25,5 +25,5 @@ sub config_any_args {
     }
 }
 
-no Moose;
+no Mouse;
 1;
