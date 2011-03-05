@@ -4,8 +4,6 @@ use inc::Module::Install 0.91;
 name 'MouseX-SimpleConfig';
 all_from 'lib/MouseX/SimpleConfig.pm';
 
-test_requires 'Test::More' => '0.42';
-
 requires 'Mouse'                      => '0.35';
 requires 'MouseX::ConfigFromFile'     => '0.02';
 requires 'Config::Any'                => '0.13';
