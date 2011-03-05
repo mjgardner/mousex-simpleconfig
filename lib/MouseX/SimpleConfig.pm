@@ -40,7 +40,7 @@ sub get_config_from_file {
 
         my $cfany_hash = $raw_cfany->{$file_tested};
         croak "configfile must represent a hash structure in file: $file_tested"
-            unless $cfany_hash && ref $cfany_hash && ref $cfany_hash eq 'HASH';
+            if not ($cfany_hash && ref $cfany_hash && ref $cfany_hash eq 'HASH');
 
         %raw_config = ( %raw_config, %{$cfany_hash} );
     }
