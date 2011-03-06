@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.11      2011-03-05 18:59:28 America/New_York
     support perl >= 5.006
 0.10      2011-03-05 13:23:37 America/New_York
     convert release to Dist::Zilla
